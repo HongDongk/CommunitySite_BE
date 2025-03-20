@@ -22,12 +22,12 @@ public class SpringConfig {
         this.memberRepository = memberRepository;
     }
 
-//    private EntityManager em;
-//
-//    @Autowired
-//    public SpringConfig(EntityManager em) {
-//        this.em = em;
-//    }
+    //    private EntityManager em;
+    //
+    //    @Autowired
+    //    public SpringConfig(EntityManager em) {
+    //        this.em = em;
+    //    }
 
     @Bean
     public MemberService memberService(){
@@ -35,12 +35,12 @@ public class SpringConfig {
         return new MemberService(memberRepository);
     }
 
-//    @Bean
-//    public MemberRepository memberRepository(){
-//        // return new MemoryMemberRepository();
-//        // return new JdbcTemplateMemberRepository(dataSource);
-//        return new JpaMemberRepository(em);
-//
-//    }
+    //    @Bean
+    //    public MemberRepository memberRepository(){
+    //        // return new MemoryMemberRepository();
+    //        // return new JdbcTemplateMemberRepository(dataSource);
+    //        return new JpaMemberRepository(em);
+    //
+    //    }
 
 }
