@@ -1,34 +1,31 @@
 package community.community_spring.service;
 
 import community.community_spring.domain.Member;
-import community.community_spring.repository.MemberRepository;
-import community.community_spring.repository.MemoryMemberRepository;
+import community.community_spring.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 // @Service
 @Transactional
-public class MemberService {
-    private final MemberRepository memberRepository;
+public class UserService {
+    private final UserRepository userRepository;
 
     // @Autowired
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     // 회원가입
     public Long join(Member member){
         validateDuplicateMember(member); // 중복 회원 검증
-        memberRepository.save(member);
+        userRepository.save(member);
         return member.getId();
     }
 
     private void validateDuplicateMember(Member member) {
-        memberRepository.findByName(member.getName())
+        userRepository.findByName(member.getName())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
@@ -36,11 +33,11 @@ public class MemberService {
 
     // 전체 회원 조회
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+        return userRepository.findAll();
     }
 
     // 특정 회원 조회
     public Optional<Member> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
+        return userRepository.findById(memberId);
     }
 }

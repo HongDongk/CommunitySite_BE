@@ -1,7 +1,7 @@
 package community.community_spring.controller;
 
 import community.community_spring.domain.Member;
-import community.community_spring.service.MemberService;
+import community.community_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @Controller
 public class MemberController {
-    private final MemberService memberService;
+    private final UserService userService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
+    public MemberController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping( "/members/new")
@@ -30,14 +30,14 @@ public class MemberController {
         member.setName(form.getName());
 
         System.out.println("sssss" + member.getName());
-        memberService.join(member);
+        userService.join(member);
 
         return "redirect:/";
     }
 
     @GetMapping(value = "/members")
     public String list(Model model) {
-        List<Member> members = memberService.findMembers();
+        List<Member> members = userService.findMembers();
         model.addAttribute("members", members);
         return "members/memberList";
     }
