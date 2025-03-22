@@ -31,4 +31,12 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public void deleteUserById(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new IllegalArgumentException("해당 ID의 사용자가 존재하지 않습니다.");
+        }
+
+        userRepository.deleteById(userId);
+    }
 }
