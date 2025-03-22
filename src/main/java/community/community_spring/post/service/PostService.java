@@ -2,7 +2,9 @@ package community.community_spring.post.service;
 
 import community.community_spring.post.domain.Post;
 import community.community_spring.post.dto.PostCreateRequest;
+import community.community_spring.post.dto.PostDetailResponse;
 import community.community_spring.post.dto.PostListResponse;
+import community.community_spring.post.dto.PostUpdateRequest;
 import community.community_spring.post.repository.JpaPostRepository;
 import community.community_spring.user.domain.User;
 import community.community_spring.user.repository.JpaUserRepository;
@@ -10,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +58,43 @@ public class PostService {
                         .userEmail(post.getUser().getEmail())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    // 게시글 상세조회
+    public PostDetailResponse getPostDetail(Long postId) {
+        return postRepository.findById(postId)
+                .map(post -> PostDetailResponse.builder()
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .imageUrl(post.getImageUrl())
+                        .updatedAt(post.getUpdatedAt())
+                        .likes(post.getLikes())
+                        .commentCount(post.getCommentCount())
+                        .views(post.getViews())
+                        .userEmail(post.getUser().getEmail())
+                        .build())
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+    }
+
+    //게시글 상세수정
+    public void updatePost(Long postId, PostUpdateRequest request) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+
+        post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
+        post.setImageUrl(request.getImageUrl());
+        post.setUpdatedAt(LocalDateTime.now());
+
+        postRepository.save(post);
+    }
+
+    //게시글 상세삭제
+    public void deletePost(Long postId) {
+        if (!postRepository.existsById(postId)) {
+            throw new IllegalArgumentException("해당 게시글이 존재하지 않습니다.");
+        }
+
+        postRepository.deleteById(postId);
     }
 }
