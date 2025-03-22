@@ -2,12 +2,13 @@ package community.community_spring.user.dto;
 
 import lombok.*;
 
-@Setter
 @Getter
-public class UserSignupRequest {
-    // Getter, Setter
+@Setter
+@Builder
+public class LoginResponse {
+    private Long id;
     private String email;
-    private String password;
     private String nickname;
     private String profileUrl;
 }
+
