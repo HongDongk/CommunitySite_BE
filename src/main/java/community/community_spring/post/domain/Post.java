@@ -1,5 +1,6 @@
 package community.community_spring.post.domain;
 
+import community.community_spring.comment.domain.PostComment;
 import community.community_spring.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -53,10 +54,10 @@ public class Post {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-//    // 댓글 목록 연관관계 (양방향)
-//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<PostComment> comments;
-//
+    // 댓글 목록 연관관계 (양방향)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostComment> comments;
+
 //    // 좋아요 목록 연관관계 (양방향)
 //    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<PostLike> likesList;
