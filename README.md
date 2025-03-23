@@ -2,7 +2,9 @@
 
 ## 1. 프로젝트 개요
 
-`SpringBoot`를 기반으로 구현한 커뮤니티 백엔드 프로젝트입니다. 회원가입, 로그인, 게시글 작성 및 수정, 댓글, 좋아요, 프로필 이미지 업로드 등의 기능을 제공합니다.
+`SpringBoot`를 기반으로 구현한 커뮤니티 백엔드 프로젝트입니다. 
+
+회원가입, 로그인, 게시글 작성 및 수정, 댓글, 좋아요, 프로필 이미지 업로드 등의 기능을 제공합니다.
 
 ## 2. 개발 환경
 
@@ -14,10 +16,12 @@
 ## 3. 사용 라이브러리 및 의존성
 
 ```gradle
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 implementation 'org.springframework.boot:spring-boot-starter-web'
 implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-implementation 'org.springframework.boot:spring-boot-starter-validation'
+runtimeOnly 'com.mysql:mysql-connector-j'
 implementation 'org.projectlombok:lombok'
+annotationProcessor 'org.projectlombok:lombok'
 ```
 
 -   `application.yml`에서 MySQL 연결 설정 추가
