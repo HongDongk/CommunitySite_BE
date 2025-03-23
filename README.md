@@ -8,7 +8,7 @@
 
 ## 2. 개발 환경
 
--   Java: Homebrew 21.0.6
+-   Java: 21.0.6
 -   Spring Boot
 -   JPA (Hibernate)
 -   MySQL
