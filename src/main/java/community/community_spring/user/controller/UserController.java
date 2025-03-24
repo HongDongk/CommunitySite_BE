@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -70,6 +71,7 @@ public class UserController {
         }
     }
 
+    //회원정보변경(비밀번호)
     @PutMapping("/users/password/{userId}")
     public ResponseEntity<String> updatePassword(
             @PathVariable Long userId,
